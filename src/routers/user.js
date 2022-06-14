@@ -2,7 +2,8 @@ const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
 const auth  = require('../middleware/auth');
-const { sendWelcomeEmail } = require('../emails/account')
+const { sendWelcomeEmail } = require('../emails/account');
+const UserRole = require('../models/userRole');
 
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
@@ -54,7 +55,7 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 })
 
 router.get('/users/profile', auth, async (req, res) => {
-    res.send(req.user)
+        res.send(await req.user.populate('role'))
 })
 
 router.patch('/users', auth, async(req, res) => {

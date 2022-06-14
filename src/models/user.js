@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        required: true,
+        required: true, 
         trim: true,
         lowercase: true,
         validate(email) {
@@ -37,6 +37,11 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    role: {
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: 'UserRole'
+    },
     tokens: [
         {
             token: {
@@ -51,6 +56,14 @@ const userSchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
+
+// userSchema.virtual('tickets',{
+//     ref: 'Ticket',
+//     localField: '_id',
+//     foreignField: 'owner',
+// })
+
+
 
 userSchema.methods.toJSON = function () {
     const user = this
