@@ -7,17 +7,17 @@ const insertDefaultRoles = async () => {
         {
           userRole: 'super_admin',
           roleName: 'Super Admin',
-          permissions: ['read' , 'write', 'remove', 'assignment', 'assignTo', 'changeRole', 'closeTicket' ]  
+          permissions: ['read' , 'write', 'remove', 'assignment', 'assignTo', 'changeRole', 'closeTicket', 'read_all_tickets' ]  
         },
         {
             userRole: 'admin',
             roleName: 'Admin',
-            permissions: ['read', 'write', 'assignment', 'closeTicket' ]
+            permissions: ['read', 'write', 'assignment', 'closeTicket', 'read_all_tickets' ]
         },
         {
             userRole: 'user',
             roleName: 'User',
-            permissions: ['read', 'openTicket', 'sendCloseRequest']
+            permissions: ['read', 'openTicket', 'sendCloseRequest', 'read_own_tickets']
         }
     ] 
    

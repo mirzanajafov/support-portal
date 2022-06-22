@@ -2,6 +2,7 @@ const express = require('express')
 require('./db/mongoose')
 const init = require('./init/init')
 const userRouter = require('./routers/user')
+const ticketRouter = require('./routers/ticket')
 const app = express()
 const port = process.env.PORT
 const Logger = require('./logger');
@@ -19,8 +20,9 @@ const Initialization = async () => {
     
 }
 
-Initialization()
+// Initialization()
 app.use(userRouter)
+app.use(ticketRouter)
 app.get('', (req, res) => {
     res.send('worked')
 
