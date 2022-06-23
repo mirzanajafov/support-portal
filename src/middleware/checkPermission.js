@@ -1,7 +1,7 @@
-const checkPermission =  (neededPermission) => {
+const checkPermission =  (neededPermissions) => {
     return async (req, res, next) => {
         try {
-            if(!req.user.role.permissions.includes(neededPermission)){
+            if(!req.user.role.permissions.includes(neededPermissions)){
                 throw new Error()
             }
     

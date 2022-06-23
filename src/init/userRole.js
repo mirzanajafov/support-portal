@@ -17,7 +17,7 @@ const insertDefaultRoles = async () => {
         {
             userRole: 'user',
             roleName: 'User',
-            permissions: ['read', 'openTicket', 'sendCloseRequest', 'read_own_tickets']
+            permissions: ['read', 'openTicket', 'sendCloseRequest', 'read_own_tickets', 'remove_own_ticket']
         }
     ] 
    
