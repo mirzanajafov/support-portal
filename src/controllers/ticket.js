@@ -48,13 +48,18 @@ const updateTicket = async (id, user, body) => {
     return ticket
 }
 
-const removeTicket = async (id, user) => {
-    ticket = await Ticket.findOneAndDelete({ _id: id, owner: user._id })
+const removeTicket = async (id) => {
+    const ticket = await Ticket.findOneAndDelete({ _id: id })
 
     if (!ticket) {
         throw new Error('Ticket is not found!')
     }
 
+    return ticket
+}
+
+const isUserTicket = async (id, userId) => {
+    const ticket =  await Ticket.findOne({_id:id, owner: userId})
     return ticket
 }
 
@@ -64,5 +69,6 @@ module.exports = {
     getAllTickets,
     getSingleTicket,
     updateTicket,
-    removeTicket
+    removeTicket,
+    isUserTicket
 }

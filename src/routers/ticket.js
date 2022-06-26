@@ -21,7 +21,7 @@ router.get('/tickets', auth, async (req, res) => {
 
 })
 
-router.get('/allTickets', auth, checkPermission('read_all_tickets'), async (req, res) => {
+router.get('/allTickets', auth, checkPermission(['read_all_tickets']), async (req, res) => {
 
     try {
         res.send(await ticketController.getAllTickets())
@@ -31,7 +31,7 @@ router.get('/allTickets', auth, checkPermission('read_all_tickets'), async (req,
     }
 })
 
-router.get('/tickets/:id', auth, async (req, res) => {
+router.get('/tickets/:id', auth, checkPermission(['read_all_tickets', 'read_own_tickets']), async (req, res) => {
     const _id = req.params.id
 
     try {
@@ -49,7 +49,7 @@ router.patch('/tickets/:id', auth, async (req, res) => {
     }
 })
 
-router.delete('/tickets/:id', auth, async (req, res) => {
+router.delete('/tickets/:id', auth, checkPermission(['remove', 'remove_own_ticket']), async (req, res) => {
     try {
         // let ticket;
 
@@ -63,11 +63,23 @@ router.delete('/tickets/:id', auth, async (req, res) => {
         //     throw new Error('Ticket is not found!')
         // }
 
-        res.send(await ticketController.removeTicket(req.params.id, req.user))
+        res.send(await ticketController.removeTicket(req.params.id))
     } catch (e) {
         res.status(500).send(e.message)
     }
 })
+
+// router.get('/test/:id',auth, async (req,res) => {
+   
+//     try{
+//         const ticket = await ticketController.isUserTicket('62b6d8deb9441913281413dc','61b6d54e04f37d33f5569eeb') 
+//         console.log(ticket)   
+//         res.send(ticket)
+//     }catch(e){
+//         res.send(e.message)
+//     }
+   
+// })
 
 
 

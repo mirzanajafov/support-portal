@@ -9,6 +9,21 @@ const checkUpdateFields =  (body, allowedUpdates) => {
     return updates
 }
 
+const userHasPermission = (permissionList, permissions) => {
+        // let hasPermission;
+      
+        for( const permissionObj of permissionList) {
+             const hasPermission  =  permissions.some(permission => permissionObj.permission == permission)
+        
+             if(hasPermission){
+                return {access:hasPermission, accessType: permissionObj.type}
+             }
+           
+        }
+        return false
+}
+
 module.exports = {
     checkUpdateFields,
+    userHasPermission
 }
